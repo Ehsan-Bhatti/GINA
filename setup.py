@@ -11,6 +11,7 @@ setup(
     package_data={
       'util_files': ['diff_analysis.R'],
     },
+    include_package_data=True,
     zip_safe=False,
     install_requires=[
         'pandas',
