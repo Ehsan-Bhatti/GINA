@@ -9,9 +9,8 @@ setup(
     description='',
     packages=find_packages(),
     package_data={
-      'util_files': ['diff_analysis.R']
+      'util_files': ['diff_analysis.R'],
     },
-    include_package_data=True,
     install_requires=[
         'pandas',
         'numpy',
