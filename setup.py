@@ -21,7 +21,7 @@ setup(
         'drugstone',
         'goatools',
         'mygene',
-        'rpy2==3.5.12',
+        'rpy2',
         'setuptools-git'
     ]
 
