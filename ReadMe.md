@@ -21,7 +21,7 @@ For differential expression analysis and GEO data acquisition GINA uses the foll
 
 
 
-## Installation 
+## Installation
 
 To install use the following command 
 ```bash 
@@ -35,8 +35,9 @@ Otherwise use their web server for active module identification available from h
 
 
 ## Usage 
-Examples of use cases using this package. 
+Examples of use cases using this package.
 
+The APID network can be downloaded from http://cicblade.dep.usal.es:8080/APID/init.action#subtab4
 
 
 Differential Expression Analysis: 
