@@ -8,6 +8,9 @@ setup(
     author_email='',
     description='',
     packages=find_packages(),
+    package_data={
+      'util_files': ['diff_analysis.R']
+    },
     install_requires=[
         'pandas',
         'numpy',
@@ -16,7 +19,7 @@ setup(
         'drugstone',
         'goatools',
         'mygene',
-        'rpy2'
+        'rpy2==3.5.12'
     ]
 
 )
