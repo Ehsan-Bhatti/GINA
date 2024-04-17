@@ -5,7 +5,10 @@ import rpy2.robjects as ro
 from rpy2.robjects import pandas2ri
 
 
-with open('gina/util_files/diff_analysis.R', 'r') as f:
+r_file_path = os.path.dirname(__file__)
+r_file_path = os.path.join(r_file_path, 'util_files/diff_analysis.R')
+
+with open(r_file_path, 'r') as f:
     rf = f.read()
 
 r_func = STAP(rf, 'r_func')
