@@ -32,7 +32,8 @@ If your system meets the following requirements download the DOMINO pacakge from
 
 Otherwise use their web server for active module identification available from https://domino.cs.tau.ac.il/ 
 
-
+## Documentation
+Read the docs https://gina.readthedocs.io/en/latest/
 
 ## Usage 
 Examples of use cases using this package.
