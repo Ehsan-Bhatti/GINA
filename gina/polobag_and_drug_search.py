@@ -18,6 +18,7 @@ drug_search_algorithms = ["adjacentDrugs", "trustrank", "multisteiner", "keypath
 def drug_search(gene_list, algorithm='trustrank', output_csv_file_name=None):
     """
     Search for drugs related a list of supplied genes
+
     :param gene_list: List of genes to search for. If String treat as a path to file where genes are listed with a new line between them. Otherwise pass a list of genes
     :param algorithm: Algorithm to use to search for drugs. Defaults to 'trustrank' other possible choices - "adjacentDrugs", "trustrank", "multisteiner", "keypathwayminer", "closeness", "degree", "proximity", "betweenness"
     :param output_csv_file_name: String name of csv file to save results. Defaults to None and does not save the dataframe
@@ -44,6 +45,7 @@ def drug_search(gene_list, algorithm='trustrank', output_csv_file_name=None):
 def drug_search_polobag_analysis_files(polobag_analysis_directory, output_directory=None, algorithm='trustrank'):
     """
     Apply the drug search method to the analysed PoLoBag files
+
     :param polobag_analysis_directory: String path to the directory containing the PoLoBag analysis files
     :param output_directory: String path to directory to save the drug search outputs. Defaults to None and saves the outputs to the current directory
     :param algorithm: String algorithm to use when searching for related drugs. Defaults to 'trustrank' other possible choices - "adjacentDrugs", "trustrank", "multisteiner", "keypathwayminer", "closeness", "degree", "proximity", "betweenness"
@@ -80,6 +82,7 @@ def drug_search_polobag_analysis_files(polobag_analysis_directory, output_direct
 def PoLoBag(n12, n22, nM, nB, alpha, infilename, outfilename):
     """
     PoLoBag Algorithm
+
     :param n12: Float number of linear features in each bootstrap sample
     :param n22: Float number of nonlinear features in each bootstrap sample
     :param nM: Float bootstrap sample size
@@ -212,6 +215,7 @@ def save_expression_data_for_polobag(expression_data, save_txt_file_name, module
                                      samples_to_ignore=None, genes_to_ignore=None):
     """
     Format expression data for PoLoBag. Saves expression data to the PoLoBag format where genes are the index of a dataframe and columns are the samples
+
     :param expression_data: Dataframe of expression data. Index should correspond to genes and columns are the samples
     :param save_txt_file_name: String file name to save the expresison data should end with the extension '.txt'
     :param module_genes: List of genes (index values) to include in the data. If left as None defaults to all genes present
@@ -236,6 +240,7 @@ def prepare_expression_data_polobag(expression_data, feature_data=None, feature_
                                     expression_data_output_txt_file_name=None):
     """
     Helper method to prepare input for PoLoBag. This method is used to alternate the expression data index (genes) with the symbol names that appear in the feature data. The phenotype data is used to exclude those samples that were not used in the differential expression analysis
+
     :param expression_data: Dataframe of expression data
     :param feature_data: Dataframe of feature data. If left as None no transformations based on feature data are applied
     :param feature_gene_id_col: String column name of gene symbols in the feature data. If feature data is not None this parameter is required
@@ -281,7 +286,9 @@ def prepare_expression_data_polobag(expression_data, feature_data=None, feature_
 def run_polobag_on_modules(modules, expression_data, output_directory, feature_data=None, feature_gene_id_col=None,
                 feature_gene_sep_string=None, phenotype_data=None, phenotype_col_name=None, n12=0.5,
                 n22=2.5, nM=0.5, nB=500, alpha=0.1):
-    """ Run PoLoBag on modules found from the DOMINO algorithm
+    """
+    Run PoLoBag on modules found from the DOMINO algorithm
+
     :param modules: Either a list of modules or Str of the file name of the modules
     :param expression_data: Expression data if no phenotype or feature data is supplied this expression data should have been altered using the prepare_expression_data_for_polobag method
     :param output_directory: String of the directory where to save output. If the directory doesn't exist it is created
@@ -399,6 +406,7 @@ def polobag_analysis_single_module(polobag_df, network_df, active_genes, excel_f
                                     drug_search_algorithm='trustrank'):
     """
     Analyse PoloBag results of a single module to see which predictions appear in the supplied network
+
     :param polobag_df:  The PoLoBag dataframe that is generated as part of hte run_polobag_method. The dataframe can be supplied directly or a String file path to the dataframe
     :param network_df: Dataframe of the ground truth network, most likely the one used in DOMINO to find the modules
     :param active_genes: List of genes of interest most commonly the active genes supplied as an input for DOMINO
@@ -410,10 +418,10 @@ def polobag_analysis_single_module(polobag_df, network_df, active_genes, excel_f
     :param network_df_merge_exists: Boolean value if the 'merged' column exists in the network. This is a helper parameter for the polobag_analysis_multiple_files method. Defaults as False and created the column as part of the method
     :param active_gene_drug_search_csv_file: String file name to save the results of the drug search. If left as None no drug search is carried out
     :param drug_search_algorithm: Algorithm to use to search for drugs. Defaults to 'trustrank' other possible choices - "adjacentDrugs", "trustrank", "multisteiner", "keypathwayminer", "closeness", "degree", "proximity", "betweenness"
-    :return: A dictionary:
-        :key 'polobag_network': Edges predicted by PoLoBag that are found in the supplied network
-        :key 'active_gene_network': Edges in the PoLoBag network that contain at least one active gene
-        :key 'active_genes': A list of the active genes supplied to the method
+    :return: A dictionary
+    :key 'polobag_network': Edges predicted by PoLoBag that are found in the supplied network
+    :key 'active_gene_network': Edges in the PoLoBag network that contain at least one active gene
+    :key 'active_genes': A list of the active genes supplied to the method
     """
 
     if isinstance(polobag_df, str):
@@ -479,6 +487,7 @@ def polobag_analysis_multiple_files(path_to_polobag_output_directory, network_df
                                     active_gene_drug_search_output_directory=None, drug_search_algorithm='trustrank'):
     """
     Analyse multiple PoloBag results to see which predictions appear in the supplied network
+
     :param path_to_polobag_output_directory: String path to the directory containing PoLoBag results. This is the output to the run_polobag method
     :param network_df: Dataframe of the ground truth network, most likely the one used in DOMINO to find the modules
     :param active_genes: List of genes of interest most commonly the active genes supplied as an input for DOMINO

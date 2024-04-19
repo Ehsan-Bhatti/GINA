@@ -20,6 +20,7 @@ normalising_method_algorithms = ['TMM', 'RLE', 'upperquartile', 'none']
 def helper_convert_r_to_python(li):
     """
     Helper function to convert between R and Python
+
     :param li: R list (dictionary) to be converted.
     :return: A python dictionary of the converted items.
     """
@@ -32,6 +33,7 @@ def helper_convert_r_to_python(li):
 def get_data_from_geo(data_id, directory_to_save_file=None):
     """
     Retrieves data from the Gene Expression Omnibus using the accession ID
+
     :param data_id: A string, the accession ID of the desired dataset e.g. 'GSE1234'
     :param directory_to_save_file: Path to the location to save the downloaded data. Defaults to the current working directory if no path is supplied.
     :return: Downloads data nad saves it to the directory.
@@ -86,6 +88,7 @@ def expression_data_from_geo_data(geo_data, save_file_name=None):
 def feature_data_from_geo_data(geo_data, save_file_name=None):
     """
     Retrieve the feature data from a GEO dataframe. Access the feature of the dataset seeing information about each gene recorded in the dataset e.g. 'Gene Symbols' and ''
+
     :param geo_data: The GEO dataframe most likely accessed using the read_geo_file method
     :param save_file_name: File name to save the feature data as a csv file. Must end in '.csv'
     :return: A dataframe of feature data
@@ -101,6 +104,7 @@ def feature_data_from_geo_data(geo_data, save_file_name=None):
 def print_all_columns(df):
     """
     Print all columns present in a GEO dataframe. Useful for finding the label col in the Phenotype DF
+
     :param df: A GEO dataframe e.g. from the read_geo_file method or expression_data_from_geo_data method
     :return: Prints all columns
     """
@@ -116,6 +120,7 @@ def print_all_columns(df):
 def print_unique_values_in_geo_column(df, col_name):
     """
     See the  unique values in a GEO column. Useful for seeing all phenotypes recorded
+
     :param df: A dataframe of GEO data e.g. result of get_data_from_geo method
     :param col_name: Name of the column we wish to see the values of
     :return: Prints all unique values
@@ -134,6 +139,7 @@ def differential_expression_analysis(geo_data, phenotype_col_name,
                                      decide_test_p_val=0.05):
     """
     Run differential expression analysis
+
     :param geo_data: GEO data can be obtained using the read_geo_file method
     :param phenotype_col_name: String name of column that contains the phenotypes
     :param list_of_phenotype_groups: List of lists separating phenotypic labels into group e.g. [['Cancer Tissue'], ['Non-Cancer Tissue'], ['Control', 'Healthy']]
@@ -142,14 +148,14 @@ def differential_expression_analysis(geo_data, phenotype_col_name,
     :param decide_test_adj_method: String specifying the P-Value adjustment method
     :param decide_test_p_val: Float of the desired P-Value of the test
     :return: A dictionary containing the results of the differential expression analysis and if selected the saved Excel file
-        :key 'contrast_fit': result of contrast.fit method on a linear model and the different phenotypic groups
-        :key 'empirical_bayes_fit': result of the eBayes method on the result of contrast_fit
-        :key 'table_empirical_bayes': table of the eBayes method for all genes
-        :key 'differentially_expressed_genes': dataframe showing which genes showing whether genes are differentially expressed
-        :key 'calculation_info': record of the user supplied parameters for this calculation
-        :key 'phenotype_data': phenotype data used in the calculation
-        :key 'expression_data': expression data used in the calculation
-        :key 'feature_data': feature data used in the calculation
+    :key 'contrast_fit': result of contrast.fit method on a linear model and the different phenotypic groups
+    :key 'empirical_bayes_fit': result of the eBayes method on the result of contrast_fit
+    :key 'table_empirical_bayes': table of the eBayes method for all genes
+    :key 'differentially_expressed_genes': dataframe showing which genes showing whether genes are differentially expressed
+    :key 'calculation_info': record of the user supplied parameters for this calculation
+    :key 'phenotype_data': phenotype data used in the calculation
+    :key 'expression_data': expression data used in the calculation
+    :key 'feature_data': feature data used in the calculation
     """
     if decide_test_adj_method not in decide_adj_test_algorithms:
         raise Exception(f'Invalid "decide_test_adj_method" arg ({decide_test_adj_method})\nUse one of the following: {decide_adj_test_algorithms}')
@@ -164,14 +170,15 @@ def differential_expression_analysis(geo_data, phenotype_col_name,
 def read_single_rna_seq_file(file_name, file_sep_delimiter='\t', header=True, excel_file_name=None):
     """
     Read a single RNA Seq file
+
     :param file_name: RNA seq file name
     :param file_sep_delimiter: String delimiter used to separate data in the RNA seq file. Defaults to tab
     :param header: Boolean value whether the file has a header. Defaults to True
     :param excel_file_name: String Excel file name to save the RNA seq file must end in xlsx. Defaults to None and does not save the file
     :return: A dictionary containing 3 items:
-        :key 'phenotype': dataframe of the phenotype information.
-        :key 'expression': dataframe of the expression information.
-        :key 'feature': dataframe of the feature information.
+    :key 'phenotype': dataframe of the phenotype information.
+    :key 'expression': dataframe of the expression information.
+    :key 'feature': dataframe of the feature information.
     """
     if excel_file_name is None:
         output = r_func.read_single_rna_seq_file(file_name, file_sep_delimiter, header)
@@ -185,6 +192,7 @@ def read_multiple_rna_seq_files(path_to_files, files=None, file_sep_delimiter='\
                                 names_and_count_cols=[1, 2], excel_file_name=None):
     """
     Read multiple RNA Seq files
+
     :param path_to_files: String the path to directory containing RNA Seq files
     :param files: List of RNA seq files useful if RNA seq files are in directory with other files. Defaults to None and uses all files in the path_to_files directory
     :param file_sep_delimiter: String delimiter used to separate data in the RNA seq file. Defaults to tab
@@ -192,9 +200,9 @@ def read_multiple_rna_seq_files(path_to_files, files=None, file_sep_delimiter='\
     :param names_and_count_cols: A list of the columns that are the gene names and counts respectively. Defaults to [1, 2]. Note that in R columns being counting from 1 not 0
     :param excel_file_name: String Excel file name to save the RNA seq file must end in 'xlsx'.  Defaults to None and does not save the file
     :return: A dictionary containing 3 items:
-        :key 'phenotype': dataframe of the phenotype information
-        :key 'expression': dataframe of the expression information
-        :key 'feature': dataframe of the feature information
+    :key 'phenotype': dataframe of the phenotype information
+    :key 'expression': dataframe of the expression information
+    :key 'feature': dataframe of the feature information
     """
     if files is None:
         files = os.listdir(path_to_files)
@@ -216,6 +224,7 @@ def rna_seq_differential_expression_analysis(phenotype_data, expression_data, fe
                                              decide_test_p_val=0.05, file_name=None):
     """
     Differential expression analysis on RNA Seq data
+
     :param phenotype_data: Dataframe of the phenotype data
     :param expression_data: Dataframe of the expression data
     :param feature_data: Dataframe of the feature data
@@ -227,16 +236,16 @@ def rna_seq_differential_expression_analysis(phenotype_data, expression_data, fe
     :param decide_test_p_val: Float of the desired P-Value of the test
     :param file_name:
     :return: A dictionary containing the results of the differential expression analysis and if selected the saved Excel file
-        :key 'contrast_fit': result of contrast.fit method on a linear model and the different phenotypic groups
-        :key 'empirical_bayes_fit': result of the eBayes method on the result of contrast_fit
-        :key 'table_empirical_bayes': table of the eBayes method for all genes
-        :key 'differentially_expressed_genes': dataframe showing which genes showing whether genes are differentially expressed
-        :key 'calculation_info': record of the user supplied parameters for this calculation
-        :key 'phenotype_data': phenotype data used in the calculation
-        :key 'expression_data': expression data used in the calculation
-        :key 'feature_data': feature data used in the calculation
-        :key 'normalised_expression_data': the normalised expression data
-        :key 'normalising_expression_weights': the normalising weights
+    :key 'contrast_fit': result of contrast.fit method on a linear model and the different phenotypic groups
+    :key 'empirical_bayes_fit': result of the eBayes method on the result of contrast_fit
+    :key 'table_empirical_bayes': table of the eBayes method for all genes
+    :key 'differentially_expressed_genes': dataframe showing which genes showing whether genes are differentially expressed
+    :key 'calculation_info': record of the user supplied parameters for this calculation
+    :key 'phenotype_data': phenotype data used in the calculation
+    :key 'expression_data': expression data used in the calculation
+    :key 'feature_data': feature data used in the calculation
+    :key 'normalised_expression_data': the normalised expression data
+    :key 'normalising_expression_weights': the normalising weights
     """
     if normalising_method not in normalising_method_algorithms:
         raise Exception(f'Invalid "normalising_method" arg ({normalising_method})\nUse one of the following: {normalising_method_algorithms}')
@@ -269,6 +278,7 @@ def list_of_differentially_expressed_genes(df, gene_name_col, differential_analy
                                            save_df_csv_file_name=None, save_list_txt_file_name=None):
     """
     Create a list of differentially expressed genes
+
     :param df: Differentially expressed dataframe the result of differential_expression_analysis method
     :param gene_name_col: Column in dataframe that contains the names of genes i.e. values returned
     :param differential_analysis_col: Column in dataframe that has the result of the differential analysis
@@ -276,8 +286,8 @@ def list_of_differentially_expressed_genes(df, gene_name_col, differential_analy
     :param save_df_csv_file_name: File name to save the data frame of differentially expressed genes should end with the extension '.csv'
     :param save_list_txt_file_name: File name to save the differentially expresssed genes as a list should end with the extensioh '.csv'
     :return: A dictionary with two items:
-        :key 'list': list of the differentially expressed genes
-        :key 'dataframe': dataframe consisting of two columns, gene column and differential expression analysis
+    :key 'list': list of the differentially expressed genes
+    :key 'dataframe': dataframe consisting of two columns, gene column and differential expression analysis
     """
 
     df = df[[gene_name_col, differential_analysis_col]]

@@ -3,10 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name='GINA',
     version='0.01',
-    url='',
     author='Ehsan Bhatti',
-    author_email='',
-    description='',
+    author_email='ENB360@student.bham.ac.uk',
     packages=find_packages(),
     package_data={
       'util_files': ['diff_analysis.R'],
