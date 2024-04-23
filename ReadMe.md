@@ -81,6 +81,7 @@ list_of_genes = diff_dict.get('list')
 
 # Using the APID dataframe of human protein-protein interactions as our base network
 # Create files for DOMINO
+APID_df = pd.read_csv('9606.mitab', sep='\t')
 ami.create_files_for_domino_input(network_df=APID_df, network_sif_file_name='data/network/APID.sif', network_node_1_col='interactor_a', network_node_2_col='interactor_b', nodes_of_interest_list=list_of_genes, nodes_of_interest_txt_file_name='data/GSE14520/gpl571_noi.txt')
 ami.create_slices_file(network_sif_file_path='data/network/APID.sif', output_file_path='data/network/APID.slices.txt')
 
