@@ -38,7 +38,7 @@ Read the docs https://gina.readthedocs.io/en/latest/
 ## Usage 
 Examples of use cases using this package.
 
-The APID network can be downloaded from http://cicblade.dep.usal.es:8080/APID/init.action#subtab4
+The APID network can be downloaded from http://apid.dep.usal.es:8080/APID/init.action
 
 
 Differential Expression Analysis: 

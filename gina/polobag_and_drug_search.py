@@ -104,7 +104,7 @@ def PoLoBag(n12, n22, nM, nB, alpha, infilename, outfilename):
                 continue
             lineData = line.rstrip().split("\t")  # tab separated input file
             genes.append(lineData[0])
-            D[lineData[0]] = stats.zscore(np.array(lineData[1:]).astype(np.float))
+            D[lineData[0]] = stats.zscore(np.array(lineData[1:]).astype(float))
     genes = np.unique(genes)
 
     regs = genes  # Potential regulators
@@ -196,10 +196,9 @@ def PoLoBag(n12, n22, nM, nB, alpha, infilename, outfilename):
                     edges.append(reg + "\t" + t)
                     w.append(val)
                 j += 1
-    # print(f"Gene Number: {gene_num}")
     gene_num += 1
 
-    sortindex = np.flip(np.argsort(np.abs(w))[np.newaxis], 1).astype(np.int)  # Sort by absolute value of edge weights
+    sortindex = np.flip(np.argsort(np.abs(w))[np.newaxis], 1).astype(int)  # Sort by absolute value of edge weights
     sedgevals = [w[s] for s in sortindex[0, :]]
     sedgevals = sedgevals / abs(sedgevals[0])
     sedges = [edges[s] for s in sortindex[0, :]]
