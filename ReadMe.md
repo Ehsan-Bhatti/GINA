@@ -28,7 +28,7 @@ To install use the following command
 pip install git+https://github.com/Ehsan-Bhatti/GINA
 ```
 
-If your system meets the following requirements download the DOMINO pacakge from https://github.com/Shamir-Lab/DOMINO 
+If your system meets their requirements download the DOMINO pacakge from https://github.com/Shamir-Lab/DOMINO 
 
 Otherwise use their web server for active module identification available from https://domino.cs.tau.ac.il/ 
 
@@ -43,7 +43,7 @@ The APID network can be downloaded from http://apid.dep.usal.es:8080/APID/init.a
 
 Differential Expression Analysis: 
 ``` Python 
-from gina import differnetial_expression_analysis as dea
+from gina import differential_expression_analysis as dea
 
 # Download GSE14520 to a directory called "data/GSE14520"
 dea.get_data_from_geo('GSE14520', directory_to_save_file='data/GSE14520')
@@ -71,11 +71,11 @@ dea.differential_expression_analysis(geo_data=gpl571, phenotype_col_name='Tissue
 Active Module Identification if the DOMINO package has been downloaded: 
 ``` Python
 from gina import active_module_identification as ami
-from gina import differnetial_expression_analysis as dea 
+from gina import differential_expression_analysis as dea 
 import pandas as pd 
 
 # Get the differentially expressed genes from our prior analysis
-feature_df = pd.read_excel('data/GSE14520/gpl571_analysis.xlsx', sheet_name='feature_df', index_col=0)
+feature_df = pd.read_excel('data/GSE14520/gpl571_analysis.xlsx', sheet_name='feature_data', index_col=0)
 diff_dict = dea.list_of_differentially_expressed_genes(feature_df, gene_name_col='Gene_Symbol', differential_analysis_col='group_1-group_2', sep_rows_string='///')
 list_of_genes = diff_dict.get('list')
 
@@ -118,8 +118,8 @@ import pandas as pd
 # Get feature and expression data 
 path_to_xl_file = 'data/GSE14520/gpl571_analysis.xlsx'
 
-feature_df = pd.read_excel(path_to_xl_file, sheet_name='feature_df', index_col=0)
-expression_df = pd.read_excel(path_to_xl_file, sheet_name='expression_df', index_col=0)
+feature_df = pd.read_excel(path_to_xl_file, sheet_name='feature_data', index_col=0)
+expression_df = pd.read_excel(path_to_xl_file, sheet_name='expression_data', index_col=0)
 
 # Run PoLoBag on modules 
 pbds.run_polobag_on_modules(modules='data/GSE14520/gpl571_domino/modules.out', expression_df=expression_df, output_directory='data/GSE14520/gpl571_polobag', feature_df=feature_df, feature_gene_id_col='Gene Symbol', feature_gene_sep_string='///', n22=2)

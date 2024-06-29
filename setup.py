@@ -7,7 +7,7 @@ setup(
     author_email='ENB360@student.bham.ac.uk',
     packages=find_packages(),
     package_data={
-      'util_files': ['diff_analysis.R'],
+      'util_files': ['util_files/*'],
     },
     include_package_data=True,
     zip_safe=False,
