@@ -19,7 +19,8 @@ autodoc_mock_imports = [
         'goatools',
         'mygene',
         'rpy2',
-        'setuptools-git'
+        'setuptools-git',
+        'warnings'
     ]
 
 project = 'GINA'
