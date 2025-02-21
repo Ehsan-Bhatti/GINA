@@ -14,7 +14,7 @@ autodoc_mock_imports = [
         'pandas',
         'numpy',
         'scipy',
-        'scikit-learn', 'sklearn',
+        'scikit-learn',
         'drugstone',
         'goatools',
         'mygene',
