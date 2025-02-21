@@ -10,6 +10,17 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('..'))
+autodoc_mock_imports = [
+        'pandas',
+        'numpy',
+        'scipy',
+        'scikit-learn',
+        'drugstone',
+        'goatools',
+        'mygene',
+        'rpy2',
+        'setuptools-git'
+    ]
 
 project = 'GINA'
 copyright = '2024, Ehsan Bhatti'
