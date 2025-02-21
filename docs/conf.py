@@ -8,10 +8,9 @@
 
 import os
 import sys
-from pathlib import Path
 
 # sys.path.insert(0, os.path.abspath('..'))
-sys.path.insert(0, str(Path('..', 'gina').resolve()))
+sys.path.insert(0, os.path.abspath('../gina'))
 
 project = 'GINA'
 copyright = '2024, Ehsan Bhatti'
